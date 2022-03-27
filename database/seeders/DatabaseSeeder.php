@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\Departments\DepartmentSeeder;
+use Database\Seeders\Employees\EmployeeSeeder;
+use Database\Seeders\Employees\GenderSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +16,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            DepartmentSeeder::class,
+            GenderSeeder::class,
+            EmployeeSeeder::class
+        ]);
     }
 }

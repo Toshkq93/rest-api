@@ -22,10 +22,10 @@ services:
         ports:
             - "33061:3306"
         environment:
-            MYSQL_DATABASE: "test"
+            MYSQL_DATABASE: "laravel-api"
             MYSQL_ROOT_PASSWORD: "secret"
-            MYSQL_PASSWORD: "secret123"
-            MYSQL_USER: "cdr"
+            MYSQL_PASSWORD: "secret1231"
+            MYSQL_USER: "user"
         volumes:
             - ./mysql/my.cnf:/etc/mysql/my.cnf
             - ./mysql/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
