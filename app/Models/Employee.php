@@ -21,4 +21,9 @@ class Employee extends Model
     {
         return $this->belongsToMany(Department::class);
     }
+
+    public function gender()
+    {
+        return $this->hasOne(Gender::class, 'id', 'gender_id');
+    }
 }
