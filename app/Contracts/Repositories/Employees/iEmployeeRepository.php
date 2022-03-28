@@ -2,8 +2,9 @@
 
 namespace App\Contracts\Repositories\Employees;
 
+use App\DTO\Employees\EmployeeDTO;
 use App\DTO\Employees\EmployeesDTOCollection;
-use App\Models\Employee;
+use App\Filters\Employees\StoreEmployeeFilter;
 
 interface iEmployeeRepository
 {
@@ -12,4 +13,9 @@ interface iEmployeeRepository
      */
     public function getList(): EmployeesDTOCollection;
 
+    /**
+     * @param StoreEmployeeFilter $filter
+     * @return EmployeeDTO
+     */
+    public function create(StoreEmployeeFilter $filter):EmployeeDTO;
 }

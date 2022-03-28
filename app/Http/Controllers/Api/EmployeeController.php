@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Contracts\Services\Employees\iEmployeeService;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Employees\ListEmployeeCollection;
+use App\Http\Requests\Emplyees\StoreEmployeeRequest;
+use App\Http\Resources\Employees\EmployeeResource;
+use App\Http\Resources\Employees\EmployeesCollection;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -16,24 +18,25 @@ class EmployeeController extends Controller
     }
 
     /**
-     * @return ListEmployeeCollection
+     * @return EmployeesCollection
      */
-    public function index(): ListEmployeeCollection
+    public function index(): EmployeesCollection
     {
-        return new ListEmployeeCollection(
+        return new EmployeesCollection(
             $this->service->getList()->getItems()
         );
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreEmployeeRequest $request
+     * @return EmployeeResource
+     * @throws \Spatie\DataTransferObject\Exceptions\UnknownProperties
      */
-    public function store(Request $request)
+    public function store(StoreEmployeeRequest $request): EmployeeResource
     {
-        //
+        return new EmployeeResource(
+            $this->service->create($request->getFilterDTO())
+        );
     }
 
     /**

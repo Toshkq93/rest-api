@@ -8,9 +8,7 @@ use Spatie\DataTransferObject\DataTransferObject;
 class EmployeeDTO extends DataTransferObject
 {
     public int $id;
-    public string $first_name;
-    public string $last_name;
-    public string $patronymic;
+    public string $fio;
     public int $salary;
     public null|GenderDTO $gender;
 
@@ -25,25 +23,9 @@ class EmployeeDTO extends DataTransferObject
     /**
      * @return string
      */
-    public function getFirstName(): string
+    public function getFio(): string
     {
-        return $this->first_name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLastName(): string
-    {
-        return $this->last_name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPatronymic(): string
-    {
-        return $this->patronymic;
+        return $this->fio;
     }
 
     /**
@@ -55,20 +37,18 @@ class EmployeeDTO extends DataTransferObject
     }
 
     /**
-     * @return GenderDTO
+     * @return null|GenderDTO
      */
-    public function getGender(): GenderDTO
+    public function getGender(): ?GenderDTO
     {
         return $this->gender;
     }
 
     /**
-     * @param GenderDTO $gender
-     * @return $this
+     * @param GenderDTO|null $gender
      */
-    public function setGender(GenderDTO $gender): self
+    public function setGender(?GenderDTO $gender): void
     {
         $this->gender = $gender;
-        return $this;
     }
 }

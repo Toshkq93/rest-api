@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('patronymic');
-            $table->foreignId('gender_id')->constrained('genders');
+            $table->unsignedBigInteger('gender_id')->nullable();
+            $table->foreign('gender_id')->references('id')->on('genders');
             $table->integer('salary');
             $table->timestamps();
         });

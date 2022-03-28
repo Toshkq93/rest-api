@@ -2,8 +2,7 @@
 
 namespace Database\Seeders\Employees;
 
-use App\Models\Gender;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Employees\Gender;
 use Illuminate\Database\Seeder;
 
 class GenderSeeder extends Seeder

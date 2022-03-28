@@ -2,12 +2,14 @@
 
 namespace Database\Seeders\Employees;
 
-use App\Models\Department;
-use App\Models\Employee;
+use App\Models\Departments\Department;
+use App\Models\Employees\Employee;
 use Illuminate\Database\Seeder;
 
 class EmployeeSeeder extends Seeder
 {
+    protected $model = Employee::class;
+
     /**
      * Run the database seeds.
      *
@@ -16,7 +18,10 @@ class EmployeeSeeder extends Seeder
     public function run()
     {
         Employee::factory(50)
-            ->hasAttached(Department::inRandomOrder()->first())
-            ->create();
+            ->create()
+            ->each(function($user) {
+                $randomFields= Department::inRandomOrder()->first();
+                $user->departments()->attach($randomFields);
+            });;
     }
 }

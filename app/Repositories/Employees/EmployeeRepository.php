@@ -6,7 +6,8 @@ use App\Contracts\Repositories\Employees\iEmployeeRepository;
 use App\DTO\Employees\EmployeeDTO;
 use App\DTO\Employees\EmployeesDTOCollection;
 use App\DTO\Genders\GenderDTO;
-use App\Models\Employee;
+use App\Filters\Employees\StoreEmployeeFilter;
+use App\Models\Employees\Employee;
 use Illuminate\Database\Eloquent\Collection;
 
 class EmployeeRepository implements iEmployeeRepository
@@ -22,6 +23,25 @@ class EmployeeRepository implements iEmployeeRepository
     }
 
     /**
+     * @param StoreEmployeeFilter $filter
+     * @return EmployeeDTO
+     */
+    public function create(StoreEmployeeFilter $filter):EmployeeDTO
+    {
+        $employee = Employee::create([
+            'first_name' => $filter->getFirstName(),
+            'last_name' => $filter->getLastName(),
+            'patronymic' => $filter->getPatronymic(),
+            'salary' => $filter->getSalary(),
+            'gender_id' => $filter->getGenderId(),
+        ]);
+
+        $employee->departments()->attach($filter->getDepartmentIds());
+
+        return $this->toDTO($employee);
+    }
+
+    /**
      * @param Employee $employees
      * @return EmployeesDTOCollection
      * @throws \Spatie\DataTransferObject\Exceptions\UnknownProperties
@@ -30,7 +50,7 @@ class EmployeeRepository implements iEmployeeRepository
     {
         $list = [];
 
-        foreach ($employees as $employee){
+        foreach ($employees as $employee) {
             $list[] = $this->toDTO($employee);
         }
 
@@ -41,8 +61,15 @@ class EmployeeRepository implements iEmployeeRepository
 
     private function toDTO(Employee $employee): EmployeeDTO
     {
-        return (new EmployeeDTO($employee->toArray()))
-            ->setGender(new GenderDTO($employee->gender->toArray()));
+        $employeeDTO  = new EmployeeDTO(
+            id: $employee->id,
+            fio: $employee->fio,
+            salary: $employee->salary
+        );
+
+        $employeeDTO->setGender(!empty($employee->gender) ? new GenderDTO($employee->gender->toArray()): null);
+
+        return $employeeDTO;
 
     }
 }

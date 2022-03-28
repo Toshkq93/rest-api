@@ -4,9 +4,9 @@ namespace App\Http\Resources\Employees;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class ListEmployeeCollection extends ResourceCollection
+class EmployeesCollection extends ResourceCollection
 {
-    public $collects = ListEmployeeResource::class;
+    public $collects = EmployeeResource::class;
 
     /**
      * Transform the resource collection into an array.

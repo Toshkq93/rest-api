@@ -6,21 +6,21 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 class GenderDTO extends DataTransferObject
 {
-    public int $id;
-    public string $name;
+    public null|int $id;
+    public null|string $name;
 
     /**
-     * @return int
+     * @return null|int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }

@@ -6,7 +6,7 @@ use App\DTO\Employees\EmployeeDTO;
 use App\Http\Resources\Genders\GenderResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ListEmployeeResource extends JsonResource
+class EmployeeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,9 +19,7 @@ class ListEmployeeResource extends JsonResource
         /** @var EmployeeDTO $this */
         return [
             'id' => $this->getId(),
-            'first_name' => $this->getFirstName(),
-            'last_name' => $this->getLastName(),
-            'patronymic' => $this->getPatronymic(),
+            'fio' => $this->getFio(),
             'salary' => $this->getSalary(),
             'geneder' => new GenderResource($this->getGender())
         ];
