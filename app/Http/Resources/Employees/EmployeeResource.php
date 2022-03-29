@@ -3,7 +3,7 @@
 namespace App\Http\Resources\Employees;
 
 use App\DTO\Employees\EmployeeDTO;
-use App\Http\Resources\Genders\GenderResource;
+use App\Http\Resources\Employees\Genders\GenderResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class EmployeeResource extends JsonResource

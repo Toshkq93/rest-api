@@ -12,6 +12,7 @@ class StoreEmployeeFilter extends DataTransferObject
     public int $salary;
     public null|int $gender_id;
     public array $department_ids;
+    public null|int $employeeId;
 
     /**
      * @return string
@@ -59,5 +60,21 @@ class StoreEmployeeFilter extends DataTransferObject
     public function getDepartmentIds(): array
     {
         return $this->department_ids;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getEmployeeId(): ?int
+    {
+        return $this->employeeId;
+    }
+
+    /**
+     * @param int|null $employeeId
+     */
+    public function setEmployeeId(?int $employeeId): void
+    {
+        $this->employeeId = $employeeId;
     }
 }

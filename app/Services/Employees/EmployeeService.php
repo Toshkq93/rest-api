@@ -17,7 +17,7 @@ class EmployeeService implements iEmployeeService
     }
 
     /**
-     * @return EmployeesDTOCollection
+     * @inheritDoc
      */
     public function getList(): EmployeesDTOCollection
     {
@@ -25,12 +25,34 @@ class EmployeeService implements iEmployeeService
     }
 
     /**
-     * @param StoreEmployeeFilter $filter
-     * @return EmployeeDTO
+     * @inheritDoc
      */
     public function create(StoreEmployeeFilter $filter):EmployeeDTO
     {
         return $this->repository->create($filter);
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function show(int $id): EmployeeDTO
+    {
+        return $this->repository->show($id);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function update(StoreEmployeeFilter $filter): bool
+    {
+        return $this->repository->update($filter);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function delete(int $id): bool
+    {
+        return $this->repository->delete($id);
+    }
 }

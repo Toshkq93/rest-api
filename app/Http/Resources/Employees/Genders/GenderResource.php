@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Genders;
+namespace App\Http\Resources\Employees\Genders;
 
 use App\DTO\Genders\GenderDTO;
 use Illuminate\Http\Resources\Json\JsonResource;

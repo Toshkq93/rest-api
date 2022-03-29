@@ -64,6 +64,8 @@ class StoreEmployeeRequest extends FormRequest
      */
     public function getFilterDTO():StoreEmployeeFilter
     {
-        return new StoreEmployeeFilter($this->validated());
+        return new StoreEmployeeFilter(
+            $this->validated()
+        );
     }
 }

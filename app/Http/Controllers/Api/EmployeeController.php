@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Contracts\Services\Employees\iEmployeeService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Employees\UpdateEmployeeRequest;
 use App\Http\Requests\Emplyees\StoreEmployeeRequest;
 use App\Http\Resources\Employees\EmployeeResource;
 use App\Http\Resources\Employees\EmployeesCollection;
-use Illuminate\Http\Request;
+use App\Http\Resources\SuccessResource;
 
 class EmployeeController extends Controller
 {
@@ -40,36 +41,35 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return EmployeeResource
      */
-    public function show($id)
+    public function show(int $id): EmployeeResource
     {
-        //
+        return new EmployeeResource(
+            $this->service->show($id)
+        );
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateEmployeeRequest $request
+     * @return SuccessResource
      */
-    public function update(Request $request, $id)
+    public function update(UpdateEmployeeRequest $request): SuccessResource
     {
-        //
+        return new SuccessResource(
+            $this->service->update($request->getFilterDTO())
+        );
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return SuccessResource
      */
-    public function destroy($id)
+    public function destroy(int $id): SuccessResource
     {
-        //
+        return new SuccessResource(
+            $this->service->delete($id)
+        );
     }
 }
