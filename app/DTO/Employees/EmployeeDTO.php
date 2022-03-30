@@ -2,7 +2,7 @@
 
 namespace App\DTO\Employees;
 
-use App\DTO\Genders\GenderDTO;
+use App\DTO\Employees\Genders\GenderDTO;
 use Spatie\DataTransferObject\DataTransferObject;
 
 class EmployeeDTO extends DataTransferObject

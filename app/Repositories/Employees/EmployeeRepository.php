@@ -5,10 +5,10 @@ namespace App\Repositories\Employees;
 use App\Contracts\Repositories\Employees\iEmployeeRepository;
 use App\DTO\Employees\EmployeeDTO;
 use App\DTO\Employees\EmployeesDTOCollection;
-use App\DTO\Genders\GenderDTO;
+use App\DTO\Employees\Genders\GenderDTO;
+use App\Exceptions\EntityNotFoundException;
 use App\Filters\Employees\StoreEmployeeFilter;
 use App\Models\Employees\Employee;
-use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Response;
 
@@ -83,12 +83,12 @@ class EmployeeRepository implements iEmployeeRepository
     /**
      * @param int $employeeId
      * @return Employee
-     * @throws Exception
+     * @throws EntityNotFoundException
      */
     private function findOrExeption(int $employeeId): Employee
     {
         if (!$employee = Employee::find($employeeId)){
-            throw new Exception("Employee #{$employeeId} not found", Response::HTTP_NOT_FOUND);
+            throw new EntityNotFoundException("Employee #{$employeeId} not found", Response::HTTP_NOT_FOUND);
         }
 
         return $employee;
@@ -112,6 +112,11 @@ class EmployeeRepository implements iEmployeeRepository
         );
     }
 
+    /**
+     * @param Employee $employee
+     * @return EmployeeDTO
+     * @throws \Spatie\DataTransferObject\Exceptions\UnknownProperties
+     */
     private function toDTO(Employee $employee): EmployeeDTO
     {
         $employeeDTO = new EmployeeDTO(
@@ -123,6 +128,5 @@ class EmployeeRepository implements iEmployeeRepository
         $employeeDTO->setGender(!empty($employee->gender) ? new GenderDTO($employee->gender->toArray()) : null);
 
         return $employeeDTO;
-
     }
 }

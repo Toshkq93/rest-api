@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DTO\Genders;
+namespace App\DTO\Employees\Genders;
 
 use Spatie\DataTransferObject\DataTransferObject;
 
