@@ -1,0 +1,6 @@
+/vendor
+/php
+/nginx
+/mysql
+docker-compose.yml
+Dockerfile
