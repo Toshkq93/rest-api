@@ -2,5 +2,6 @@
 /php
 /nginx
 /mysql
+/storage/docker/
 docker-compose.yml
 Dockerfile
